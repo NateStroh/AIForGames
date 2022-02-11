@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Boid.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjects\Crumb.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MovementAlgorithms\MovementAlgorithms.cpp">
+      <Filter>MovementAlgorithms</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{9cda19f6-d0ad-4c78-bfdb-fa189be0f044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MovementAlgorithms">
+      <UniqueIdentifier>{59b3b737-206e-445f-a313-3c3640bce06b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Physics">
+      <UniqueIdentifier>{be1822be-50dd-4654-a1ad-7c8b6acd8159}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Boid.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Crumb.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Physics\SteeringOutput.h">
+      <Filter>GameObjects\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObjects\Physics\Rigidbody.h">
+      <Filter>GameObjects\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MovementAlgorithms\MovementAlgorithms.h">
+      <Filter>MovementAlgorithms</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
