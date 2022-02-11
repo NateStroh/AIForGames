@@ -7,20 +7,31 @@ Once downloaded you should just have to double click the StrohmyerHW1.sln to
 open the project in visual studios 2017.
 Now just hit play and it should run on x86 or x64 mode
 
+
 button mappings/controls
+
 Kinematic motion: a
 
 Seek Steering Behavior: s
+
 Default - 1: dynamic seek
+
 2: posMatcharrive
+
 3: pursue
 
 Wander Steering behavior: d
+
 Default - 1: look where you are going method
+
 2: face method
+
 3: kinematic orientation method
 
 Flocking: f
+
 Default - 1: leader method
+
 2: all boids in flock wander
+
 3: leader method - same as number 1
