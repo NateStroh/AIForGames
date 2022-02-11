@@ -144,7 +144,7 @@ void ofApp::update() {
       break;
     // flocking behaviors
     case 3:
-      
+
       leadBoid.steeringOutput.linearAcceleration =
           AI::MovementAlgorithms::DynamicWander(leadBoid.rigidbody, 140, 210,
                                                 ofVec2f(300, 300))
@@ -153,7 +153,7 @@ void ofApp::update() {
           AI::MovementAlgorithms::LookWhereYouAreGoing(leadBoid.rigidbody,
                                                        10.0f, 20.0f, 5, 30, 10)
               .rotationAcceleration;
-      
+
       if (modeChanges == 2) {
         // looping over all boids except the last one, our lead boid
         for (unsigned int i = 0; i < flock.size() - 1; i++) {
@@ -193,7 +193,6 @@ void ofApp::update() {
   }
 
   leadBoid.Update(deltaTime);
-
 }
 
 //--------------------------------------------------------------

@@ -51,7 +51,7 @@ void AI::Boid::Draw() {
   ofDrawTriangle(0, -(radius), 0, radius, radius * 2, 0);
 
   ofPopMatrix();
-  
+
   // drawing the crumbs related to this object
   for (int i = 0; i < NUM_CRUMBS; i++) {
     crumbs[i].Draw();

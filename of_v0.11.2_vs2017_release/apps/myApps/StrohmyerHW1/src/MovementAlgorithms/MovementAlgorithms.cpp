@@ -303,7 +303,7 @@ AI::SteeringOutput AI::MovementAlgorithms::Flock(
       i_characterRigidbody, centroid, i_maxAcceleration, i_maxSpeed,
       i_slowRadius, i_slowRadius, i_timeToTarget);
 
-  // blending different outputs together 
+  // blending different outputs together
   blendedOutput.linearAcceleration +=
       seperationSteering.linearAcceleration * 2.0f;
   blendedOutput.linearAcceleration +=
