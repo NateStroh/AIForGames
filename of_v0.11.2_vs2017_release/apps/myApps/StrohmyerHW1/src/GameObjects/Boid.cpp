@@ -48,7 +48,7 @@ void AI::Boid::Draw() {
   ofSetColor(color);
 
   ofDrawCircle(0, 0, radius);
-  ofDrawTriangle(0, -(radius), 0, radius, radius * 2, 0);
+  ofDrawTriangle(0, -(radius), 0, radius, radius * 1.8, 0);
 
   ofPopMatrix();
 

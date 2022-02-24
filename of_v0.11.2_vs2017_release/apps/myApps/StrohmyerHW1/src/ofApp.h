@@ -1,8 +1,9 @@
 // copyright 2022 Nate Strohmyer
 
-#ifndef STROHMYERHW1_SRC_OFAPP_H_
-#define STROHMYERHW1_SRC_OFAPP_H_
+#ifndef OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW1_SRC_OFAPP_H_
+#define OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW1_SRC_OFAPP_H_
 
+#include <string>
 #include <vector>
 
 #include "GameObjects\Boid.h"
@@ -33,11 +34,10 @@ class ofApp : public ofBaseApp {
   AI::PathfindingAlgorithms::ConnectionGraph ReadInGraph(std::string file_path);
 
   AI::Boid leadBoid;
-  std::vector<AI::Boid> flock;
-  int16_t mode = 0;
   int16_t corner = 0;
-  int16_t modeChanges = 1;
-
+  bool draw_grid = false;
+  bool draw_blocked_tiles = false;
+  bool draw_walls = true;
   int rows = 15;
   int columns = 20;
   float tile_size = 51.0f;
@@ -62,4 +62,4 @@ class ofApp : public ofBaseApp {
       263, 264, 265, 266, 267, 269, 275, 276, 277, 278, 289};
 };
 
-#endif  // STROHMYERHW1_SRC_OFAPP_H_
+#endif  // OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW1_SRC_OFAPP_H_

@@ -365,8 +365,8 @@ AI::SteeringOutput AI::MovementAlgorithms::FollowPath(
     Rigidbody* character_rigidbody,
     std::vector<int> path,
     int columns,
-    float tile_size, 
-    float smoothing_radius, 
+    float tile_size,
+    float smoothing_radius,
     float max_acceleration,
     float max_speed,
     float slow_radius,
@@ -379,37 +379,40 @@ AI::SteeringOutput AI::MovementAlgorithms::FollowPath(
 
   target.position.x = index_column * tile_size + tile_size / 2;
   target.position.y = index_row * tile_size + tile_size / 2;
-  
+
   ofVec2f direction = character_rigidbody->position - target.position;
   float distance = direction.length();
-  
+
   // check if position is path location plus range
-  if (distance < smoothing_radius && 
+  if (distance < smoothing_radius &&
       character_rigidbody->path_index < path.size()-1) {
     character_rigidbody->path_index++;
     index_row = (path[character_rigidbody->path_index]) / columns;
     index_column = (path[character_rigidbody->path_index]) % columns;
 
     target.position.x = index_column * tile_size + tile_size / 2;
-    target.position.y = index_row * tile_size + tile_size / 2;    
+    target.position.y = index_row * tile_size + tile_size / 2;
   }
 
   if (character_rigidbody->path_index >= path.size()-1) {
-    //return Seek(*character_rigidbody, target, max_acceleration);
-    return PositionMatchingArrive(*character_rigidbody, 
-                                  target, 
+    if (distance < target_radius) {
+      character_rigidbody->velocity = { 0, 0 };
+      return SteeringOutput();
+    }
+    return PositionMatchingArrive(*character_rigidbody,
+                                  target,
                                   max_acceleration,
-                                  max_speed, 
-                                  slow_radius, 
-                                  target_radius, 
+                                  max_speed,
+                                  slow_radius,
+                                  target_radius,
                                   time_to_target);
   } else {
-    return PositionMatchingArrive(*character_rigidbody, 
-                                  target, 
+    return PositionMatchingArrive(*character_rigidbody,
+                                  target,
                                   max_acceleration,
-                                  max_speed, 
-                                  smoothing_radius, 
-                                  target_radius, 
+                                  max_speed,
+                                  smoothing_radius,
+                                  target_radius,
                                   time_to_target);
   }
 }

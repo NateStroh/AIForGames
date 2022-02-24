@@ -185,6 +185,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAlgorithms\MovementAlgorithms.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Pathfinding\ConnectionGraph.cpp" />
     <ClCompile Include="src\Pathfinding\PathfindingAlgorithms.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,7 +197,6 @@
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Pathfinding\ConnectionGraph.h" />
     <ClInclude Include="src\Pathfinding\PathfindingAlgorithms.h" />
-    <ClInclude Include="src\Pathfinding\WeightedEdge.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

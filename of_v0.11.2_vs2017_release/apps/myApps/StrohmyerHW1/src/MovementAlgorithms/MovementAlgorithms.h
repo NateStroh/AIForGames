@@ -1,7 +1,7 @@
 // copyright 2022 Nate Strohmyer
 
-#ifndef STROHMYERHW1_SRC_MOVEMENTALGORITHMS_MOVEMENTALGORITHMS_H_
-#define STROHMYERHW1_SRC_MOVEMENTALGORITHMS_MOVEMENTALGORITHMS_H_
+#ifndef OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW1_SRC_MOVEMENTALGORITHMS_MOVEMENTALGORITHMS_H_
+#define OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW1_SRC_MOVEMENTALGORITHMS_MOVEMENTALGORITHMS_H_
 
 #include <vector>
 
@@ -77,11 +77,11 @@ SteeringOutput FlockNoLeader(Rigidbody i_characterRigidbody,
                              std::vector<Rigidbody> i_targetRigidbodys,
                              float i_maxAcceleration, float i_maxSpeed,
                              float i_slowRadius, float i_targetRadius,
-                             float i_timeToTarget, float i_fleeRadius, 
+                             float i_timeToTarget, float i_fleeRadius,
                              float i_decay);
 
-SteeringOutput FollowPath(Rigidbody* i_characterRigidbody, 
-                          std::vector<int> path, 
+SteeringOutput FollowPath(Rigidbody* i_characterRigidbody,
+                          std::vector<int> path,
                           int columns,
                           float tile_size,
                           float smoothing_radius,
@@ -95,4 +95,4 @@ SteeringOutput FollowPath(Rigidbody* i_characterRigidbody,
 
 }  // namespace AI
 
-#endif  // STROHMYERHW1_SRC_MOVEMENTALGORITHMS_MOVEMENTALGORITHMS_H_
+#endif  // OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW1_SRC_MOVEMENTALGORITHMS_MOVEMENTALGORITHMS_H_

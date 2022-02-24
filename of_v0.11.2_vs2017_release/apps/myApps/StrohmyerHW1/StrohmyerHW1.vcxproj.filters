@@ -19,6 +19,9 @@
     <ClCompile Include="src\Pathfinding\PathfindingAlgorithms.cpp">
       <Filter>Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pathfinding\ConnectionGraph.cpp">
+      <Filter>Pathfinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -57,9 +60,6 @@
       <Filter>MovementAlgorithms</Filter>
     </ClInclude>
     <ClInclude Include="src\Pathfinding\PathfindingAlgorithms.h">
-      <Filter>Pathfinding</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Pathfinding\WeightedEdge.h">
       <Filter>Pathfinding</Filter>
     </ClInclude>
     <ClInclude Include="src\Pathfinding\ConnectionGraph.h">
