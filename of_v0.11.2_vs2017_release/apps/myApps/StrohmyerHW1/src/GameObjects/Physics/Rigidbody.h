@@ -13,6 +13,7 @@ struct Rigidbody {
   ofVec2f velocity;
   float rotation;
   float mass;
+  int path_index;
 
   Rigidbody()
       : position(0, 0), orientation(0), velocity(0, 0), rotation(0), mass(1) {}
@@ -22,7 +23,8 @@ struct Rigidbody {
         orientation(i_orientation),
         velocity(0, 0),
         rotation(0),
-        mass(1) {}
+        mass(1),
+        path_index(0) {}
 };
 
 }  // namespace AI

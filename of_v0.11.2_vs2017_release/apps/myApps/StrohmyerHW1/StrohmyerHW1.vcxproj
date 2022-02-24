@@ -185,6 +185,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAlgorithms\MovementAlgorithms.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Pathfinding\PathfindingAlgorithms.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameObjects\Boid.h" />
@@ -193,6 +194,9 @@
     <ClInclude Include="src\GameObjects\Physics\SteeringOutput.h" />
     <ClInclude Include="src\MovementAlgorithms\MovementAlgorithms.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\Pathfinding\ConnectionGraph.h" />
+    <ClInclude Include="src\Pathfinding\PathfindingAlgorithms.h" />
+    <ClInclude Include="src\Pathfinding\WeightedEdge.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

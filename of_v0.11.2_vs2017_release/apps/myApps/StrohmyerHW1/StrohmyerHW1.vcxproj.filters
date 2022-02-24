@@ -16,6 +16,9 @@
     <ClCompile Include="src\MovementAlgorithms\MovementAlgorithms.cpp">
       <Filter>MovementAlgorithms</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pathfinding\PathfindingAlgorithms.cpp">
+      <Filter>Pathfinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -29,6 +32,9 @@
     </Filter>
     <Filter Include="GameObjects\Physics">
       <UniqueIdentifier>{be1822be-50dd-4654-a1ad-7c8b6acd8159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pathfinding">
+      <UniqueIdentifier>{9a19661f-9297-46b4-a0bd-d07da7846a6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +55,15 @@
     </ClInclude>
     <ClInclude Include="src\MovementAlgorithms\MovementAlgorithms.h">
       <Filter>MovementAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinding\PathfindingAlgorithms.h">
+      <Filter>Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinding\WeightedEdge.h">
+      <Filter>Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pathfinding\ConnectionGraph.h">
+      <Filter>Pathfinding</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

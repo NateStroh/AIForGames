@@ -3,11 +3,103 @@
 #include "ofApp.h"
 
 #include "MovementAlgorithms\MovementAlgorithms.h"
+#include "Pathfinding\PathfindingAlgorithms.h"
 #include "math\ofMath.h"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofSetFrameRate(60);
+
+  int graph[9][9] = {
+      {0, 4, 0, 0, 0, 0, 0, 8, 0},
+      {4, 0, 8, 0, 0, 0, 0, 11, 0},
+      {0, 8, 0, 7, 0, 4, 0, 0, 2},
+      {0, 0, 7, 0, 9, 14, 0, 0, 0},
+      {0, 0, 0, 9, 0, 10, 0, 0, 0},
+      {0, 0, 4, 14, 10, 0, 2, 0, 0},
+      {0, 0, 0, 0, 0, 2, 0, 1, 6},
+      {8, 11, 0, 0, 0, 0, 1, 0, 7},
+      {0, 0, 2, 0, 0, 0, 6, 7, 0}};
+
+//  int grid_test[25][25] = {
+//      {0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+//      {0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
+//      {0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
+//      {0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0},
+//      {0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0},
+//      {0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0},
+//      {0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0},
+//      {0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0},
+//      {0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0},
+//      {0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1},
+//      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0}
+//  };
+
+  int grid_test[25][25] = {
+      {0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,0,5,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,4,0,1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {1,0,0,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,1,0,0,0,3,0,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,2,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
+      {0,0,0,0,1,0,0,0,1,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0},
+      {0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0},
+      {0,0,0,0,0,0,1,0,0,0,5,0,1,0,0,0,2,0,0,0,0,0,0,0,0},
+      {0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0},
+      {0,0,0,0,0,0,0,0,2,0,0,0,1,0,1,0,0,0,3,0,0,0,0,0,0},
+      {0,0,0,0,0,0,0,0,0,5,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0},
+      {0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,3,0,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,2,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,1,0,1},
+      {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,1,0}
+  };
+
+  //AI::PathfindingAlgorithms::ConnectionGraph cg(9, 8);
+  //for (int i = 0; i < 9; i++) {
+  //  for (int j = 0; j < 9; j++) {
+  //    cg.data[i][j] = graph[i][j];
+  //  }
+  //}
+
+  AI::PathfindingAlgorithms::ConnectionGraph cg(5,5);
+  for (int i = 0; i < 25; i++) {
+    for (int j = 0; j < 25; j++) {
+      cg.data[i][j] = grid_test[i][j];
+    }
+  }
+
+  AI::PathfindingAlgorithms::ConnectionGraph cg1 = ReadInGraph("Grid10000NodesRandom.txt");
+
+  cg_graph = ReadInGraph("Grid15by20BlockedTiles.txt");
+
+  std::vector<int> vec =
+      AI::PathfindingAlgorithms::DijkstraSearch(&cg1, cg1.num_nodes, 0, 5004);
+
+  vec = AI::PathfindingAlgorithms::AStarSearch(&cg1, cg1.num_nodes, 0, 5004);
+
   AI::Boid b;
   b.rigidbody.position = {100, 100};
   flock.push_back(b);
@@ -66,8 +158,7 @@ void ofApp::setup() {
   b18.rigidbody.position = {30, 240};
   flock.push_back(b18);
 
-  leadBoid.rigidbody.position = {100,
-                                 ofGetCurrentViewport().getBottom() - 100.0f};
+  leadBoid.rigidbody.position = {100, 100.0f};
   leadBoid.rigidbody.orientation = ofDegToRad(0);
   leadBoid.color = ofColor::greenYellow;
   leadBoid.rigidbody.mass = 20;
@@ -82,10 +173,24 @@ void ofApp::update() {
       break;
     // kinematic seek 4 corners
     case 0:
-      leadBoid.rigidbody.velocity = GoToCorner(corner, leadBoid);
+      if (!current_path.empty()) {
+      leadBoid.steeringOutput.linearAcceleration = 
+          AI::MovementAlgorithms::FollowPath(
+            &leadBoid.rigidbody, // character rigidbody
+            current_path, // path to follow - vector<int>
+            columns, // number of columns
+            tile_size, // tile size
+            55.0f, // smoothing radius
+            50.0f, // max acceleration
+            100.0f, // max speed
+            200.0f, // slow radius 
+            40.0f, // target radius
+            0.1f).linearAcceleration;
+      //leadBoid.rigidbody.velocity = GoToCorner(corner, leadBoid);
       leadBoid.rigidbody.orientation =
           AI::MovementAlgorithms::KinematicAlign(leadBoid.rigidbody.velocity)
               .rotationAcceleration;
+      }
       break;
     // seek steering behaviors
     case 1:
@@ -128,14 +233,14 @@ void ofApp::update() {
             AI::MovementAlgorithms::LookWhereYouAreGoing(
                 leadBoid.rigidbody, 10.0f, 20.0f, 5, 30, 10)
                 .rotationAcceleration;
-      // calling special wander with face called on the target it's seeking
+        // calling special wander with face called on the target it's seeking
       } else if (modeChanges == 2) {
-            AI::SteeringOutput steeringOutput =
+        AI::SteeringOutput steeringOutput =
             AI::MovementAlgorithms::DynamicWanderFaceTarget(
                 leadBoid.rigidbody, 140, 210, ofVec2f(300, 300), 30.0f, 60.0f,
                 6, 60, 10);
         leadBoid.steeringOutput = steeringOutput;
-      // kinematic align
+        // kinematic align
       } else {
         leadBoid.rigidbody.orientation =
             AI::MovementAlgorithms::KinematicAlign(leadBoid.rigidbody.velocity)
@@ -211,6 +316,25 @@ void ofApp::draw() {
                     ofGetCurrentViewport().getBottom() - 100.0f},
                    10);
       ofDrawCircle({100, ofGetCurrentViewport().getBottom() - 100.0f}, 10);
+      
+      for (int i = 0; i <= rows; i++) {
+        ofDrawRectangle({0, tile_size * i},
+                        (tile_size * columns) + grid_thickness, grid_thickness);
+      }
+      for (int i = 0; i <= columns; i++) {
+        ofDrawRectangle({tile_size*i, 0}, grid_thickness, tile_size * rows);
+      }
+
+      for (int index : tilesblocked) {
+        ofVec2f draw_position;
+        int index_row = index / columns;
+        int index_column = index % columns;
+        draw_position.x = index_column * tile_size + grid_thickness * 3;
+        draw_position.y = index_row * tile_size + grid_thickness * 3;
+        
+        ofDrawRectangle(draw_position, tile_size - 25,
+                        tile_size - 25);
+      }
 
       break;
     // seek steering behaviors
@@ -248,26 +372,26 @@ void ofApp::keyReleased(int key) {
     corner = 0;
     leadBoid.rigidbody.position = {100,
                                    ofGetCurrentViewport().getBottom() - 100.0f};
-  // seek steering behaviors
+    // seek steering behaviors
   } else if (key == 's') {
-    mode = 1;
-    modeChanges = 1;
-    clickLocation = {400, 400};
-  // wander steering behavior
+      mode = 1;
+      modeChanges = 1;
+      clickLocation = {400, 400};
+    // wander steering behavior
   } else if (key == 'd') {
-    mode = 2;
-    modeChanges = 1;
-  // flocking behaviors
+      mode = 2;
+      modeChanges = 1;
+    // flocking behaviors
   } else if (key == 'f') {
-    mode = 3;
-    modeChanges = 1;
-  // changing specifics in algorithm
+      mode = 3;
+      modeChanges = 1;
+    // changing specifics in algorithm
   } else if (key == '1') {
-    modeChanges = 1;
+      modeChanges = 1;
   } else if (key == '2') {
-    modeChanges = 2;
+      modeChanges = 2;
   } else if (key == '3') {
-    modeChanges = 3;
+      modeChanges = 3;
   }
 }
 
@@ -282,9 +406,24 @@ void ofApp::mousePressed(int x, int y, int button) {}
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button) {
-  if (mode == 1) {
-    clickLocation = ofVec2f(x, y);
-  }
+  // if (mode == 1) {
+  //   clickLocation = ofVec2f(x, y);
+  // }
+  clickLocation = ofVec2f(x, y);
+  int char_row = (leadBoid.rigidbody.position.y / tile_size);
+  int char_col = (leadBoid.rigidbody.position.x / tile_size);
+  int character_pos_to_index = (char_row * columns) + char_col;
+
+  int click_row = (clickLocation.y / tile_size);
+  int click_col = (clickLocation.x / tile_size);
+  int click_to_index = ((click_row * columns) + click_col);
+
+  leadBoid.rigidbody.path_index = 0;
+  current_path = AI::PathfindingAlgorithms::AStarSearch(&cg_graph,
+                                                        cg_graph.num_nodes,
+                                                        character_pos_to_index,
+                                                        click_to_index);
+  //current_path = AI::PathfindingAlgorithms::DijkstraSearch(&cg_graph, cg_graph.num_nodes, character_pos_to_index, click_to_index);
 }
 
 //--------------------------------------------------------------
@@ -338,6 +477,44 @@ ofVec2f ofApp::GoToCorner(int i_corner, AI::Boid i_boidToMove) {
   return AI::MovementAlgorithms::Seek(i_boidToMove.rigidbody,
                                       AI::Rigidbody(positionToSeekTo, 0), 120)
       .linearAcceleration;
+}
+
+AI::PathfindingAlgorithms::ConnectionGraph ofApp::ReadInGraph(
+    std::string file_path) {
+  ofFile file;
+  file.open(ofToDataPath(file_path), ofFile::ReadOnly, false);
+
+  unsigned int nodes = 0;
+  unsigned int row_num = 0;
+  unsigned int col_num = 0;
+  auto lines = ofSplitString(ofBufferFromFile(file_path).getText(), "\n");
+  for (string line : lines) {
+    if (line[0] == 'p') {
+      vector<string> words = ofSplitString(line, " ");
+      nodes = std::stoi(words[2]);
+      row_num = std::stoi(words[4]);
+      col_num = std::stoi(words[5]);
+      break;
+    }
+  }
+  if (nodes == 0) {
+    return AI::PathfindingAlgorithms::ConnectionGraph();
+  }
+  
+  AI::PathfindingAlgorithms::ConnectionGraph return_graph(row_num, col_num);
+
+  for (string line : lines) {
+    if (line[0] == 'a') {
+      vector<string> words = ofSplitString(line, " ");
+      int from_index = std::stoi(words[1])-1;
+      int to_index = std::stoi(words[2])-1;
+      int cost = std::stoi(words[3]);
+      
+      return_graph.data[from_index][to_index] = cost;
+    }
+  }
+
+  return return_graph;
 }
 
 //--------------------------------------------------------------

@@ -74,10 +74,22 @@ SteeringOutput Flock(Rigidbody i_characterRigidbody,
                      float i_timeToTarget, float i_fleeRadius, float i_decay);
 
 SteeringOutput FlockNoLeader(Rigidbody i_characterRigidbody,
-                     std::vector<Rigidbody> i_targetRigidbodys,
-                     float i_maxAcceleration, float i_maxSpeed,
-                     float i_slowRadius, float i_targetRadius,
-                     float i_timeToTarget, float i_fleeRadius, float i_decay);
+                             std::vector<Rigidbody> i_targetRigidbodys,
+                             float i_maxAcceleration, float i_maxSpeed,
+                             float i_slowRadius, float i_targetRadius,
+                             float i_timeToTarget, float i_fleeRadius, 
+                             float i_decay);
+
+SteeringOutput FollowPath(Rigidbody* i_characterRigidbody, 
+                          std::vector<int> path, 
+                          int columns,
+                          float tile_size,
+                          float smoothing_radius,
+                          float max_acceleration,
+                          float max_speed,
+                          float slow_radius,
+                          float target_radius,
+                          float time_to_target);
 
 }  // namespace MovementAlgorithms
 
