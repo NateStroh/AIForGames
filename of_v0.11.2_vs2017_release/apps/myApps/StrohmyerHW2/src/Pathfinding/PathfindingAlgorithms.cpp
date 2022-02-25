@@ -91,7 +91,7 @@ std::vector<int> AI::PathfindingAlgorithms::AStarSearchMDH(
   fringe.push(IndexToCost(start_node_index, 0));
   int* cost_so_far = new int[graph->num_nodes];
   int* came_from = new int[graph->num_nodes];
-  for (int i = 0; i < graph->num_nodes; i++) {
+  for (unsigned int i = 0; i < graph->num_nodes; i++) {
     cost_so_far[i] = INT_MAX;
   }
   cost_so_far[start_node_index] = 0;
@@ -155,7 +155,7 @@ std::vector<int> AI::PathfindingAlgorithms::AStarSearchEDH(
   fringe.push(IndexToCost(start_node, 0));
   int* cost_so_far = new int[graph->num_nodes];
   int* came_from = new int[graph->num_nodes];
-  for (int i = 0; i < graph->num_nodes; i++) {
+  for (unsigned int i = 0; i < graph->num_nodes; i++) {
     cost_so_far[i] = INT_MAX;
   }
   cost_so_far[start_node] = 0;
@@ -218,7 +218,7 @@ std::vector<int> AI::PathfindingAlgorithms::AStarSearchRH(
   fringe.push(IndexToCost(start_node, 0));
   int* cost_so_far = new int[graph->num_nodes];
   int* came_from = new int[graph->num_nodes];
-  for (int i = 0; i < graph->num_nodes; i++) {
+  for (unsigned int i = 0; i < graph->num_nodes; i++) {
     cost_so_far[i] = INT_MAX;
   }
   cost_so_far[start_node] = 0;
@@ -242,7 +242,7 @@ std::vector<int> AI::PathfindingAlgorithms::AStarSearchRH(
       if (graph->data[current_node][i] != 0) {
         int new_cost = cost_so_far[current_node] +
                        graph->data[current_node][i] +
-                       RandomHueristic(1,10);
+                       RandomHueristic(1, 10);
 
         if (new_cost < cost_so_far[i]) {
           cost_so_far[i] = new_cost;
@@ -292,7 +292,7 @@ int AI::PathfindingAlgorithms::EuclidianDistanceHueristic(int columns,
   int start_index_y = start_index % columns;
   int end_index_x = end_index / columns;
   int end_index_y = end_index % columns;
-  ofVec2f position_1;  
+  ofVec2f position_1;
   position_1.x = start_index_y * tile_size + tile_size / 2;
   position_1.y = start_index_x * tile_size + tile_size / 2;
   ofVec2f position_2;

@@ -2,6 +2,7 @@
 
 #include "ofApp.h"
 
+#include <inttypes.h>
 #include "MovementAlgorithms\MovementAlgorithms.h"
 #include "Pathfinding\PathfindingAlgorithms.h"
 #include "math\ofMath.h"
@@ -152,7 +153,8 @@ void ofApp::setup() {
       &cg, cg.num_nodes, 0, 24);
   PrintVector(grid_path);
   printf("Grid Graph - AStar\n");
-  grid_path = AI::PathfindingAlgorithms::AStarSearchMDH(&cg, cg.num_nodes, 0, 24);
+  grid_path = AI::PathfindingAlgorithms::AStarSearchMDH(
+      &cg, cg.num_nodes, 0, 24);
   PrintVector(grid_path);
 
   AI::PathfindingAlgorithms::ConnectionGraph cg1 =
@@ -177,8 +179,17 @@ void ofApp::setup() {
 
   vec = AI::PathfindingAlgorithms::AStarSearchRH(&cg1, cg1.num_nodes, 0, 9000);
 
+  vec = AI::PathfindingAlgorithms::DijkstraSearch(&cg1, cg1.num_nodes, 0, 9500);
+
+  vec = AI::PathfindingAlgorithms::AStarSearchMDH(&cg1, cg1.num_nodes, 0, 9500);
+
+  vec = AI::PathfindingAlgorithms::AStarSearchEDH(&cg1, cg1.num_nodes, 0, 9500,
+                                                  tile_size);
+
+  vec = AI::PathfindingAlgorithms::AStarSearchRH(&cg1, cg1.num_nodes, 0, 9500);
+
   cg_graph = ReadInGraph("Grid15by20BlockedTiles.txt");
-  
+
   leadBoid.rigidbody.position = {100, 100.0f};
   leadBoid.rigidbody.orientation = ofDegToRad(0);
   leadBoid.color = ofColor::greenYellow;
