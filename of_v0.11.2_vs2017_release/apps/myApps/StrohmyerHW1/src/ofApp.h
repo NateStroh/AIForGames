@@ -48,9 +48,6 @@ class ofApp : public ofBaseApp {
 
   float grid_thickness = 5.0f;
   ofVec2f clickLocation = {500, 500};
-  std::vector<int> testPath = {0,  1,  2,  3,  4,  9,  8,  7,  6,
-                               5,  10, 11, 12, 13, 14, 19, 18, 17,
-                               16, 15, 20, 21, 22, 23, 24};
   AI::PathfindingAlgorithms::ConnectionGraph cg_graph;
   std::vector<int> current_path;
 
