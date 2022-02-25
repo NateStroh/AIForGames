@@ -15,6 +15,8 @@ Now just hit play and it should run on x86 or x64 mode
 
 button mappings/controls
 
+left click - Pathfinds and goes to mouseclick location
+
 a - toggles grid drawing (green)
 
 s - toggles wall drawing (red)
