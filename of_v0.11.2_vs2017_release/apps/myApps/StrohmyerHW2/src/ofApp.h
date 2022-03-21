@@ -8,6 +8,7 @@
 
 #include "GameObjects\Boid.h"
 #include "Pathfinding\ConnectionGraph.h"
+#include "DecisionMaking\Actions\ActionManager.h"
 #include "ofMain.h"
 
 class ofApp : public ofBaseApp {
@@ -58,6 +59,8 @@ class ofApp : public ofBaseApp {
       197, 198, 202, 203, 204, 205, 206, 209, 215, 216, 217, 218, 222, 223, 224,
       225, 226, 229, 235, 236, 237, 238, 249, 255, 256, 257, 258, 260, 261, 262,
       263, 264, 265, 266, 267, 269, 275, 276, 277, 278, 289};
+
+  AI::DecisionMaking::ActionManager action_manager;
 };
 
 #endif  // OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW2_SRC_OFAPP_H_

@@ -22,6 +22,36 @@
     <ClCompile Include="src\Pathfinding\ConnectionGraph.cpp">
       <Filter>Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="src\DecisionMaking\Actions\Action.cpp">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\Actions\ActionCombination.cpp">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\Actions\ActionManager.cpp">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\Actions\ActionSequence.cpp">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTree.cpp">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeAction.cpp">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeDecision.cpp">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeNode.cpp">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\GOAP\GOAP.cpp">
+      <Filter>DecisionMaking\GOAP</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\GOAP\Task.cpp">
+      <Filter>DecisionMaking\GOAP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -38,6 +68,21 @@
     </Filter>
     <Filter Include="Pathfinding">
       <UniqueIdentifier>{9a19661f-9297-46b4-a0bd-d07da7846a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecisionMaking">
+      <UniqueIdentifier>{b943378e-7452-4e47-b046-e3a99bfbfcde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecisionMaking\Actions">
+      <UniqueIdentifier>{c2c62dc5-0667-495c-af59-18f222cf408d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecisionMaking\GOAP">
+      <UniqueIdentifier>{1d2962db-b728-4534-837d-73da9969102d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecisionMaking\DecisionTrees">
+      <UniqueIdentifier>{274983cb-2f3c-41c1-9072-a3aec7945bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecisionMaking\BehaviorTrees">
+      <UniqueIdentifier>{b4bd22b5-31bc-479d-9fef-949b3b9203c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +109,36 @@
     </ClInclude>
     <ClInclude Include="src\Pathfinding\ConnectionGraph.h">
       <Filter>Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\Actions\Action.h">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\Actions\ActionCombination.h">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\Actions\ActionManager.h">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\Actions\ActionSequence.h">
+      <Filter>DecisionMaking\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTree.h">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeAction.h">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeDecision.h">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeNode.h">
+      <Filter>DecisionMaking\DecisionTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\GOAP\GOAP.h">
+      <Filter>DecisionMaking\GOAP</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\GOAP\Task.h">
+      <Filter>DecisionMaking\GOAP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

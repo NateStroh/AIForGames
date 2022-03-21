@@ -11,6 +11,34 @@
 void ofApp::setup() {
   ofSetFrameRate(60);
 
+  AI::DecisionMaking::Action test_action;
+  test_action.priority_ = 5;
+  test_action.expiry_time_ = ofGetCurrentTime().getAsMilliseconds() + 10000;
+  AI::DecisionMaking::Action test_action1;
+  test_action1.priority_ = 5;
+  test_action1.expiry_time_ = ofGetCurrentTime().getAsMilliseconds() + 10000;
+  AI::DecisionMaking::Action test_action2;
+  test_action2.priority_ = 9;
+  test_action2.expiry_time_ = ofGetCurrentTime().getAsMilliseconds() + 10000;
+  AI::DecisionMaking::Action test_action3;
+  test_action3.priority_ = 1;
+  test_action3.expiry_time_ = ofGetCurrentTime().getAsMilliseconds() + 10000;
+  AI::DecisionMaking::Action test_action4;
+  test_action4.priority_ = 3;
+  test_action4.expiry_time_ = ofGetCurrentTime().getAsMilliseconds() + 10000;
+  
+  action_manager.ScheduleAction(&test_action);
+  action_manager.ScheduleAction(&test_action1);
+  action_manager.ScheduleAction(&test_action2);
+  action_manager.ScheduleAction(&test_action3);
+  action_manager.ScheduleAction(&test_action4);
+
+  action_manager.Execute();
+  action_manager.Execute();
+  action_manager.Execute();
+  action_manager.Execute();
+  action_manager.Execute();
+
   int graph[9][9] = {
       {0, 0, 0, 1, 0, 0, 0, 0, 0},
       {0, 0, 0, 1, 0, 0, 0, 0, 0},
