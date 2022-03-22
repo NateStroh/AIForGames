@@ -6,6 +6,8 @@
 #include "../Actions/Action.h"
 #include "Task.h"
 
+#include <bitset>
+
 namespace AI {
 
 namespace DecisionMaking {
@@ -16,7 +18,6 @@ class GOAP {
                         std::vector<bool> goal,
                         std::vector<Task> tasks);
   std::vector<bool> UpdateState(std::vector<bool> state, Task task);
-  
 };
 
 }  // namespace DecisionMaking
