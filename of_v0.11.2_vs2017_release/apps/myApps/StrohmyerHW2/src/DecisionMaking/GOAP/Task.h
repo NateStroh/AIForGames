@@ -18,7 +18,7 @@ class Task {
   Action* action_to_schedule;
 
   Task();
-  Task(Action action);
+  Task(Action* action);
   ~Task();
 };
 

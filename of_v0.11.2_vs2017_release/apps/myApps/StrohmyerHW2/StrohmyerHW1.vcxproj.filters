@@ -76,6 +76,13 @@
     <ClCompile Include="TestDTActionNode.cpp" />
     <ClCompile Include="TestDTConditionNode.cpp" />
     <ClCompile Include="TestAction.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\UntilFail.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\Limit.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBTNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -188,6 +195,13 @@
     <ClInclude Include="TestDTActionNode.h" />
     <ClInclude Include="TestDTConditionNode.h" />
     <ClInclude Include="TestAction.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\UntilFail.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\Limit.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBTNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

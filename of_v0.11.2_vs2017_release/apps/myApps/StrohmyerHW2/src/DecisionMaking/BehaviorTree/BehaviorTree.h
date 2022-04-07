@@ -4,6 +4,7 @@
 #define OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW2_SRC_DECISIONMAKING_BEHAVIORTREE_BEHAVIORTREE
 
 #include "BehaviorTreeNode.h"
+#include "../Actions/ActionManager.h"
 
 namespace AI {
 
@@ -12,6 +13,7 @@ namespace DecisionMaking {
 class BehaviorTree {
  public:
   BehaviorTreeNode root_node_;
+  ActionManager action_manager_;
 
   Action* GetAction();
  private: 

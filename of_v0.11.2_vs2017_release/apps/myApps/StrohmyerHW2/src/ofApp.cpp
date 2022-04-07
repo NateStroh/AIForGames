@@ -12,6 +12,13 @@
 #include "../TestAction.h"
 #include "../TestDTConditionNode.h"
 
+#include "DecisionMaking\BehaviorTree\BehaviorTree.h"
+#include "DecisionMaking\BehaviorTree\Limit.h"
+#include "DecisionMaking\BehaviorTree\NonDeterministicSequence.h"
+#include "DecisionMaking\BehaviorTree\Selector.h"
+#include "DecisionMaking\BehaviorTree\Sequencer.h"
+#include "../TestBTNode.h"
+
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofSetFrameRate(60);

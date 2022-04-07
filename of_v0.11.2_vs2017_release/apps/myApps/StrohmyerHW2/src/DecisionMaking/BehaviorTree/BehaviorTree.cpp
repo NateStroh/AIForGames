@@ -10,7 +10,8 @@ AI::DecisionMaking::Action* AI::DecisionMaking::BehaviorTree::GetAction() {
   switch (tick.status_) {
     // 0 = success
     case 0:
-      return nullptr;
+      action_manager_.ScheduleAction(tick.action_to_schedule_);
+      return tick.action_to_schedule_;
       break;
     // 1 = fail 
     case 1:
