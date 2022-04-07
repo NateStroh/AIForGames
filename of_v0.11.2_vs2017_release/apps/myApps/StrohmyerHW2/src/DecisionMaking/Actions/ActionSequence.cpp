@@ -6,9 +6,9 @@ bool AI::DecisionMaking::ActionSequence::CanInterupt() {
   return actions[0].CanInterupt();
 }
 
-bool AI::DecisionMaking::ActionSequence::CanDoBoth(Action other) {
-  for (Action action : actions) {
-    if (!action.CanDoBoth(other))
+bool AI::DecisionMaking::ActionSequence::CanDoBoth(Action const &other) {
+  for (size_t i = 0; i < actions.size(); i++) {
+    if (!actions[i].CanDoBoth(other)) 
       return false;
   }
 

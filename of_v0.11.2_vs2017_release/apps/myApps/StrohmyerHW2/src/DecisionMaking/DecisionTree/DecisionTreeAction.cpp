@@ -12,12 +12,12 @@ AI::DecisionMaking::DecisionTreeAction::DecisionTreeAction() {
 }
 
 AI::DecisionMaking::DecisionTreeAction::DecisionTreeAction(
-    Action action_to_add){
-    action = new Action(action_to_add);
+    Action* action_to_add) {
+    action = action_to_add;
 }
 
 AI::DecisionMaking::DecisionTreeAction::~DecisionTreeAction() { 
-  if (action != nullptr) {
-    delete action;
-  }
+  //if (action != nullptr) {
+  //  delete action;
+  //}
 }

@@ -17,7 +17,7 @@ class DecisionTreeAction : public DecisionTreeNode {
   DecisionTreeNode* MakeDecision();
 
   DecisionTreeAction();
-  DecisionTreeAction(Action action_to_add);
+  DecisionTreeAction(Action* action_to_add);
   ~DecisionTreeAction();
 };
 

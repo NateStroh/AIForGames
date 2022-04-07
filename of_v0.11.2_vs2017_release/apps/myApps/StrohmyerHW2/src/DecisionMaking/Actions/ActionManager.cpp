@@ -23,7 +23,10 @@ void AI::DecisionMaking::ActionManager::Execute() {
 
   // remove expired items from queue
   for (size_t i=0; i<queued_actions_.size(); i++) {
-    if (queued_actions_[i]->expiry_time_ < current_time) {
+    uint64_t expiry_time =
+        queued_actions_[i]->queued_time_ +
+        queued_actions_[i]->expiry_time_;
+    if (expiry_time < current_time) {
       queued_actions_.erase(queued_actions_.begin()+i);
     }
   }

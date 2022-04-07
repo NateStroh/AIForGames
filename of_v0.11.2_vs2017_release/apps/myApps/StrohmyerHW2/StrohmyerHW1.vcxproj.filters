@@ -52,6 +52,30 @@
     <ClCompile Include="src\DecisionMaking\GOAP\Task.cpp">
       <Filter>DecisionMaking\GOAP</Filter>
     </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\BehaviorTree.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\BehaviorTreeNode.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\BTTick.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\Selector.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\Decorator.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\NonDeterministicSequence.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\Sequencer.cpp">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDTActionNode.cpp" />
+    <ClCompile Include="TestDTConditionNode.cpp" />
+    <ClCompile Include="TestAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -140,6 +164,30 @@
     <ClInclude Include="src\DecisionMaking\GOAP\Task.h">
       <Filter>DecisionMaking\GOAP</Filter>
     </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\BehaviorTree.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\BehaviorTreeNode.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\BTTick.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\Selector.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\Decorator.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\NonDeterministicSequence.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\Sequencer.h">
+      <Filter>DecisionMaking\BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="TestDTActionNode.h" />
+    <ClInclude Include="TestDTConditionNode.h" />
+    <ClInclude Include="TestAction.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

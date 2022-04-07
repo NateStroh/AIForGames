@@ -1,8 +1,8 @@
 // copyright 2022 Nate Strohmyer
 
 #include "GOAP.h"
-#include <queue>
 #include <map>
+#include <queue>
 
 struct StateToCost {
   std::vector<bool> state;
@@ -27,13 +27,21 @@ struct GOAPNode {
 };
 
 int HammingDistance(std::vector<bool> state_1, std::vector<bool> state_2) {
-  return 10;
+  if (state_1.size() != state_2.size()) {
+    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
+    return 0;
+  }
+
+  int difference = 0;
+  for (size_t i = 0; i < state_1.size(); i++) {
+    if (state_1[i] != state_2[i])
+      difference++;
+  }
+  return difference;
 }
 
 std::vector<AI::DecisionMaking::Task> AI::DecisionMaking::GOAP::GetBestAction(
-    std::vector<bool> start,
-    std::vector<bool> goal,
-    std::vector<Task> tasks) {
+    std::vector<bool> start, std::vector<bool> goal, std::vector<Task> tasks) {
   // start fringe - priority queue
   std::priority_queue<StateToCost> fringe;
   fringe.push(StateToCost(start, 0));
@@ -67,8 +75,7 @@ std::vector<AI::DecisionMaking::Task> AI::DecisionMaking::GOAP::GetBestAction(
         current_cost = itr->second;
       }
 
-      int new_cost = current_cost +
-                     HammingDistance(current_state, new_state);
+      int new_cost = current_cost + HammingDistance(current_state, new_state);
 
       if (new_cost < current_cost) {
         cost_so_far.insert({new_state, new_cost});
@@ -111,15 +118,73 @@ std::vector<AI::DecisionMaking::Task> AI::DecisionMaking::GOAP::GetBestAction(
   return shortest_path;
 }
 
+std::vector<bool> AND(std::vector<bool> state_1, std::vector<bool> state_2) {
+  if (state_1.size() != state_2.size()) {
+    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
+    return std::vector<bool>();
+  }
+
+  std::vector<bool> return_vector;
+  for (size_t i = 0; i < state_1.size(); i++) {
+    return_vector.push_back(state_1[i] & state_2[i]);
+  }
+  return return_vector;
+}
+
+std::vector<bool> OR(std::vector<bool> state_1, std::vector<bool> state_2) {
+  if (state_1.size() != state_2.size()) {
+    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
+    return std::vector<bool>();
+  }
+
+  std::vector<bool> return_vector;
+  for (size_t i = 0; i < state_1.size(); i++) {
+    return_vector.push_back(state_1[i] | state_2[i]);
+  }
+  return return_vector;
+}
+
+std::vector<bool> NEGATE(std::vector<bool> state) {
+  std::vector<bool> return_vector;
+  for (size_t i = 0; i < state.size(); i++) {
+    return_vector.push_back(!state[i]);
+  }
+  return return_vector;
+}
+
+std::vector<bool> XOR(std::vector<bool> state_1, std::vector<bool> state_2) {
+  if (state_1.size() != state_2.size()) {
+    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
+    return std::vector<bool>();
+  }
+
+  std::vector<bool> return_vector;
+  for (size_t i = 0; i < state_1.size(); i++) {
+    return_vector.push_back(state_1[i] ^ state_2[i]);
+  }
+  return return_vector;
+}
+
+bool IsStateZero(std::vector<bool> state) {
+  for (size_t i = 0; i < state.size(); i++) {
+    if (state[i])
+      return false;
+  }
+  return true;
+}
+
 std::vector<bool> AI::DecisionMaking::GOAP::UpdateState(std::vector<bool> state,
                                                         Task task) {
   std::vector<bool> return_state = state;
-  // if conditions met  
-  if ((return_state ^ task.pre_) == 0) {
+  // if conditions met
+  // if ((return_state ^ task.pre_) == 0) {
+  if (IsStateZero(XOR(return_state, task.pre_))) {
     // delete conditions
-    return_state = ((~task.del_) & return_state);
+    // return_state = ((~task.del_) & return_state);
+    return_state = AND(NEGATE(task.del_), return_state);
     // add conditions
-    return_state = (task.add_ | return_state);
+    //return_state = (task.add_ | return_state);
+    return_state = OR(task.add_, return_state);
   }
   return state;
 }

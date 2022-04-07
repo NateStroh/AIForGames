@@ -16,7 +16,7 @@ class ActionSequence : public AI::DecisionMaking::Action {
   int active_action_index;
 
   bool AI::DecisionMaking::ActionSequence::CanInterupt();
-  bool AI::DecisionMaking::ActionSequence::CanDoBoth(Action other);
+  bool AI::DecisionMaking::ActionSequence::CanDoBoth(Action const &other);
   bool AI::DecisionMaking::ActionSequence::IsComplete();
   int AI::DecisionMaking::ActionSequence::Execute();
 };

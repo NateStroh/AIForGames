@@ -3,17 +3,17 @@
 #include "ActionCombination.h"
 
 bool AI::DecisionMaking::ActionCombination::CanInterupt() { 
-  for (Action action : actions) {
-    if (action.CanInterupt())
+  for (size_t i=0; i < actions.size(); i++) {
+    if (actions[i].CanInterupt()) 
       return true;
   }
 
   return false;
 }
 
-bool AI::DecisionMaking::ActionCombination::CanDoBoth(Action other) {
-  for (Action action : actions) {
-    if (!action.CanDoBoth(other))
+bool AI::DecisionMaking::ActionCombination::CanDoBoth(Action const &other) {
+  for (size_t i=0; i<actions.size(); i++) {
+    if (!actions[i].CanDoBoth(other))
       return false;
   }
 
@@ -21,8 +21,8 @@ bool AI::DecisionMaking::ActionCombination::CanDoBoth(Action other) {
 }
 
 bool AI::DecisionMaking::ActionCombination::IsComplete() {
-  for (Action action : actions) {
-    if (!action.IsComplete())
+  for (size_t i=0; i < actions.size(); i++) {
+    if (!actions[i].IsComplete())
       return false;
   }
 
@@ -31,9 +31,10 @@ bool AI::DecisionMaking::ActionCombination::IsComplete() {
 
 int AI::DecisionMaking::ActionCombination::Execute() {
   int status = 0;
-  for (Action action : actions) {
-    status = action.Execute();
-    if (status != 0)
+
+  for (size_t i=0; i < actions.size(); i++) {
+    status = actions[i].Execute();
+    if (status != 0) 
       return status;
   }
 

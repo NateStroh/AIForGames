@@ -15,7 +15,7 @@ class ActionCombination : public AI::DecisionMaking::Action {
   std::vector<Action> actions;
 
   bool AI::DecisionMaking::ActionCombination::CanInterupt();
-  bool AI::DecisionMaking::ActionCombination::CanDoBoth(Action other);
+  bool AI::DecisionMaking::ActionCombination::CanDoBoth(Action const &other);
   bool AI::DecisionMaking::ActionCombination::IsComplete();
   int AI::DecisionMaking::ActionCombination::Execute();
 };

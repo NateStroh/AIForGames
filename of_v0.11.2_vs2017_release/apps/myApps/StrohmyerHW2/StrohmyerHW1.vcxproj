@@ -184,6 +184,13 @@
     <ClCompile Include="src\DecisionMaking\Actions\ActionCombination.cpp" />
     <ClCompile Include="src\DecisionMaking\Actions\ActionManager.cpp" />
     <ClCompile Include="src\DecisionMaking\Actions\ActionSequence.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\BehaviorTree.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\BehaviorTreeNode.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\BTTick.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\Decorator.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\NonDeterministicSequence.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\Selector.cpp" />
+    <ClCompile Include="src\DecisionMaking\BehaviorTree\Sequencer.cpp" />
     <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTree.cpp" />
     <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeAction.cpp" />
     <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeDecision.cpp" />
@@ -197,12 +204,22 @@
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Pathfinding\ConnectionGraph.cpp" />
     <ClCompile Include="src\Pathfinding\PathfindingAlgorithms.cpp" />
+    <ClCompile Include="TestAction.cpp" />
+    <ClCompile Include="TestDTActionNode.cpp" />
+    <ClCompile Include="TestDTConditionNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DecisionMaking\Actions\Action.h" />
     <ClInclude Include="src\DecisionMaking\Actions\ActionCombination.h" />
     <ClInclude Include="src\DecisionMaking\Actions\ActionManager.h" />
     <ClInclude Include="src\DecisionMaking\Actions\ActionSequence.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\BehaviorTree.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\BehaviorTreeNode.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\BTTick.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\Decorator.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\NonDeterministicSequence.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\Selector.h" />
+    <ClInclude Include="src\DecisionMaking\BehaviorTree\Sequencer.h" />
     <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTree.h" />
     <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeAction.h" />
     <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeDecision.h" />
@@ -217,6 +234,9 @@
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Pathfinding\ConnectionGraph.h" />
     <ClInclude Include="src\Pathfinding\PathfindingAlgorithms.h" />
+    <ClInclude Include="TestAction.h" />
+    <ClInclude Include="TestDTActionNode.h" />
+    <ClInclude Include="TestDTConditionNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

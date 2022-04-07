@@ -7,6 +7,11 @@
 #include "Pathfinding\PathfindingAlgorithms.h"
 #include "math\ofMath.h"
 
+#include "DecisionMaking\DecisionTree\DecisionTree.h"
+#include "DecisionMaking\DecisionTree\DecisionTreeAction.h"
+#include "../TestAction.h"
+#include "../TestDTConditionNode.h"
+
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofSetFrameRate(60);
@@ -37,6 +42,43 @@ void ofApp::setup() {
   action_manager.Execute();
   action_manager.Execute();
   action_manager.Execute();
+  action_manager.Execute();
+
+  TestAction test0("action 0!");
+  TestAction test1("action 1!");
+  TestAction test2("action 2!");
+  TestAction test3("action 3!");
+  TestAction test4("action 4!");
+
+  TestDTConditionNode condition0;
+  TestDTConditionNode condition1;
+  TestDTConditionNode condition2;
+  TestDTConditionNode condition3;
+
+  AI::DecisionMaking::DecisionTreeAction action0(&test0);
+  AI::DecisionMaking::DecisionTreeAction action1(&test1);
+  AI::DecisionMaking::DecisionTreeAction action2(&test2);
+  AI::DecisionMaking::DecisionTreeAction action3(&test3);
+  AI::DecisionMaking::DecisionTreeAction action4(&test4);
+
+  condition0.false_node_ = &condition1;
+  condition0.true_node_ = &condition2;
+  
+  condition1.false_node_ = &condition3;
+  condition1.true_node_ = &action0;
+  
+  condition2.false_node_ = &action1;
+  condition2.true_node_ = &action2;
+  
+  condition3.false_node_ = &action3;
+  condition3.true_node_ = &action4;
+
+  AI::DecisionMaking::DecisionTree DT;
+  DT.action_manager_ = &action_manager;
+  DT.root_node_ = &condition0;
+
+  DT.MakeDecision();
+
   action_manager.Execute();
 
   int graph[9][9] = {
@@ -101,57 +143,6 @@ void ofApp::setup() {
                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0}
   };
-
-  // int grid_test[25][25] = {{0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {1, 0, 5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 4, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 1, 0, 0, 0, 3, 0, 3, 0, 0, 0, 1, 0,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1,
-  //                           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0,
-  //                           1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,
-  //                           0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
-  //                           0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 5, 0, 1,
-  //                           0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0,
-  //                           1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1,
-  //                           0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0,
-  //                           1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
-  //                           0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
-  //                           0, 0, 1, 0, 1, 0, 0, 0, 3, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-  //                           0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //                           1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //                           0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //                           0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //                           0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //                           0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //                           0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 1},
-  //                          {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //                           0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0}};
 
   AI::PathfindingAlgorithms::ConnectionGraph house_graph(3, 3);
   for (int i = 0; i < 9; i++) {
