@@ -19,6 +19,9 @@
 #include "DecisionMaking\BehaviorTree\Sequencer.h"
 #include "../TestBTNode.h"
 
+#include "DecisionMaking\GOAP\GOAP.h"
+#include "DecisionMaking\GOAP\Task.h"
+
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofSetFrameRate(60);
@@ -87,6 +90,89 @@ void ofApp::setup() {
   DT.MakeDecision();
 
   action_manager.Execute();
+
+  TestAction goapm1to2("Moving 1 to 2");
+  TestAction goapm1to3("Moving 1 to 3");
+  TestAction goapm2to1("Moving 2 to 1");
+  TestAction goapm2to4("Moving 2 to 4");
+  TestAction goapm3to1("Moving 3 to 1");
+  TestAction goapm3to4("Moving 3 to 4");
+  TestAction goapm4to3("Moving 4 to 3");
+  TestAction goapm4to2("Moving 4 to 2");
+  TestAction take_flag("Taking flag");
+  TestAction deliv_flag("Delivering flag!");
+
+  std::vector<bool> start_state({ 0, 1, 0, 0, 0, 0, 0, 0, 1 });
+  std::vector<bool> goal_state({ 0, 1, 0, 0, 0, 1, 0, 0, 0 });
+
+  AI::DecisionMaking::GOAP goap;
+
+  AI::DecisionMaking::Task m1to2;
+  m1to2.pre_ = std::vector<bool>({ 0, 1, 0, 0, 0, 0, 0, 0, 0 });
+  m1to2.add_ = std::vector<bool>({ 0, 0, 1, 0, 0, 0, 0, 0, 0 });
+  m1to2.del_ = std::vector<bool>({0, 1, 0, 0, 0, 0, 0, 0, 0});
+  m1to2.action_to_schedule = &goapm1to2;
+
+  AI::DecisionMaking::Task m1to3;
+  m1to3.pre_ = std::vector<bool>({ 0, 1, 0, 0, 0, 0, 0, 0, 0 });
+  m1to3.add_ = std::vector<bool>({ 0, 0, 0, 1, 0, 0, 0, 0, 0 });
+  m1to3.del_ = std::vector<bool>({ 0, 1, 0, 0, 0, 0, 0, 0, 0 });
+  m1to3.action_to_schedule = &goapm1to3;
+
+  AI::DecisionMaking::Task m2to1;
+  m2to1.pre_ = std::vector<bool>({ 0, 0, 1, 0, 0, 0, 0, 0, 0 });
+  m2to1.add_ = std::vector<bool>({ 0, 1, 0, 0, 0, 0, 0, 0, 0 });
+  m2to1.del_ = std::vector<bool>({ 0, 0, 1, 0, 0, 0, 0, 0, 0 });
+  m2to1.action_to_schedule = &goapm2to1;
+
+  AI::DecisionMaking::Task m2to4;
+  m2to4.pre_ = std::vector<bool>({ 0, 0, 1, 0, 0, 0, 0, 0, 0 });
+  m2to4.add_ = std::vector<bool>({ 0, 0, 0, 0, 1, 0, 0, 0, 0 });
+  m2to4.del_ = std::vector<bool>({ 0, 0, 1, 0, 0, 0, 0, 0, 0 });
+  m2to4.action_to_schedule = &goapm2to4;
+
+  AI::DecisionMaking::Task m3to1;
+  m3to1.pre_ = std::vector<bool>({ 0, 0, 0, 1, 0, 0, 0, 0, 0 });
+  m3to1.add_ = std::vector<bool>({ 0, 1, 0, 0, 0, 0, 0, 0, 0 });
+  m3to1.del_ = std::vector<bool>({ 0, 0, 0, 1, 0, 0, 0, 0, 0 });
+  m3to1.action_to_schedule = &goapm3to1;
+
+  AI::DecisionMaking::Task m3to4;
+  m3to4.pre_ = std::vector<bool>({ 0, 0, 0, 1, 0, 0, 0, 0, 0 });
+  m3to4.add_ = std::vector<bool>({ 0, 0, 0, 0, 1, 0, 0, 0, 0 });
+  m3to4.del_ = std::vector<bool>({ 0, 0, 0, 1, 0, 0, 0, 0, 0 });
+  m3to4.action_to_schedule = &goapm3to4;
+
+  AI::DecisionMaking::Task m4to3;
+  m4to3.pre_ = std::vector<bool>({ 0, 0, 0, 0, 1, 0, 0, 0, 0 });
+  m4to3.add_ = std::vector<bool>({ 0, 0, 0, 1, 0, 0, 0, 0, 0 });
+  m4to3.del_ = std::vector<bool>({ 0, 0, 0, 0, 1, 0, 0, 0, 0 });
+  m4to3.action_to_schedule = &goapm4to3;
+
+  AI::DecisionMaking::Task m4to2;
+  m4to2.pre_ = std::vector<bool>({ 0, 0, 0, 0, 1, 0, 0, 0, 0 });
+  m4to2.add_ = std::vector<bool>({ 0, 0, 1, 0, 0, 0, 0, 0, 0 });
+  m4to2.del_ = std::vector<bool>({ 0, 0, 0, 0, 1, 0, 0, 0, 0 });
+  m4to2.action_to_schedule = &goapm4to2;
+
+  AI::DecisionMaking::Task takeFlag;
+  takeFlag.pre_ = std::vector<bool>({ 0, 0, 0, 0, 1, 0, 0, 0, 1 });
+  takeFlag.add_ = std::vector<bool>({ 1, 0, 0, 0, 0, 0, 0, 0, 0 });
+  takeFlag.del_ = std::vector<bool>({ 0, 0, 0, 0, 0, 0, 0, 0, 1 });
+  takeFlag.action_to_schedule = &take_flag;
+
+  AI::DecisionMaking::Task deliverFlag;
+  deliverFlag.pre_ = std::vector<bool>({ 1, 1, 0, 0, 0, 0, 0, 0, 0 });
+  deliverFlag.add_ = std::vector<bool>({ 0, 0, 0, 0, 0, 1, 0, 0, 0 });
+  deliverFlag.del_ = std::vector<bool>({ 1, 0, 0, 0, 0, 0, 0, 0, 0 });
+  deliverFlag.action_to_schedule = &deliv_flag;
+  
+  std::vector<AI::DecisionMaking::Task> tasks =
+      std::vector<AI::DecisionMaking::Task>(
+          {m1to2, m1to3, m2to1, m2to4, m3to1, m3to4, m4to3, m4to2,
+           takeFlag, deliverFlag});
+
+  auto taskList = goap.GetBestAction(start_state, goal_state, tasks);
 
   int graph[9][9] = {
       {0, 0, 0, 1, 0, 0, 0, 0, 0},

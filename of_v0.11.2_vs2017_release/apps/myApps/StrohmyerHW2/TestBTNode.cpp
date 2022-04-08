@@ -5,7 +5,7 @@ TestBTNode::TestBTNode() {
 }
 
 TestBTNode::TestBTNode(AI::DecisionMaking::Action* action_to_schedule) {
-  action_ = action_to_schedule
+  action_ = action_to_schedule;
 }
 
 TestBTNode::~TestBTNode() {

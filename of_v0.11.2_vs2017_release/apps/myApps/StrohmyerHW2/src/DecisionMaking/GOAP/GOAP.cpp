@@ -66,6 +66,14 @@ std::vector<AI::DecisionMaking::Task> AI::DecisionMaking::GOAP::GetBestAction(
     for (int i = 0; i < num_neighbors; i++) {
       std::vector<bool> new_state = UpdateState(current_state, tasks[i]);
 
+      auto iter = cost_so_far.find(new_state);
+      int current_cost_of_new_node;
+      if (iter == cost_so_far.end()) {
+        current_cost_of_new_node = INT_MAX;
+      } else {
+        current_cost_of_new_node = iter->second;
+      }
+
       // try to find the items cost so far
       auto itr = cost_so_far.find(current_state);
       int current_cost;
@@ -75,9 +83,9 @@ std::vector<AI::DecisionMaking::Task> AI::DecisionMaking::GOAP::GetBestAction(
         current_cost = itr->second;
       }
 
-      int new_cost = current_cost + HammingDistance(current_state, new_state);
+      int new_cost = current_cost + HammingDistance(goal, new_state);
 
-      if (new_cost < current_cost) {
+      if (new_cost < current_cost_of_new_node) {
         cost_so_far.insert({new_state, new_cost});
         came_from.insert({new_state, GOAPNode(tasks[i], current_state)});
         fringe.push(StateToCost(new_state, new_cost));
@@ -108,7 +116,7 @@ std::vector<AI::DecisionMaking::Task> AI::DecisionMaking::GOAP::GetBestAction(
       return std::vector<Task>();
     } else {
       shortest_path.push_back(itr->second.task);
-      current_state = itr->first;
+      current_state = itr->second.state;
     }
   }
 
@@ -118,73 +126,62 @@ std::vector<AI::DecisionMaking::Task> AI::DecisionMaking::GOAP::GetBestAction(
   return shortest_path;
 }
 
-std::vector<bool> AND(std::vector<bool> state_1, std::vector<bool> state_2) {
-  if (state_1.size() != state_2.size()) {
+bool IsTaskPossible(std::vector<bool> required_state, 
+                    std::vector<bool> state_to_check) {
+  if (required_state.size() != state_to_check.size()) {
     printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
-    return std::vector<bool>();
+    return false;
   }
 
-  std::vector<bool> return_vector;
-  for (size_t i = 0; i < state_1.size(); i++) {
-    return_vector.push_back(state_1[i] & state_2[i]);
-  }
-  return return_vector;
-}
-
-std::vector<bool> OR(std::vector<bool> state_1, std::vector<bool> state_2) {
-  if (state_1.size() != state_2.size()) {
-    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
-    return std::vector<bool>();
-  }
-
-  std::vector<bool> return_vector;
-  for (size_t i = 0; i < state_1.size(); i++) {
-    return_vector.push_back(state_1[i] | state_2[i]);
-  }
-  return return_vector;
-}
-
-std::vector<bool> NEGATE(std::vector<bool> state) {
-  std::vector<bool> return_vector;
-  for (size_t i = 0; i < state.size(); i++) {
-    return_vector.push_back(!state[i]);
-  }
-  return return_vector;
-}
-
-std::vector<bool> XOR(std::vector<bool> state_1, std::vector<bool> state_2) {
-  if (state_1.size() != state_2.size()) {
-    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
-    return std::vector<bool>();
-  }
-
-  std::vector<bool> return_vector;
-  for (size_t i = 0; i < state_1.size(); i++) {
-    return_vector.push_back(state_1[i] ^ state_2[i]);
-  }
-  return return_vector;
-}
-
-bool IsStateZero(std::vector<bool> state) {
-  for (size_t i = 0; i < state.size(); i++) {
-    if (state[i])
-      return false;
+  for (size_t i = 0; i < required_state.size(); i++) {
+    if (required_state[i]) {
+      if (!state_to_check[i])
+        return false;
+    }
   }
   return true;
+}
+
+std::vector<bool> DelState(std::vector<bool> state_to_del,
+                           std::vector<bool> current_state) { 
+  if (state_to_del.size() != current_state.size()) {
+    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
+    return std::vector<bool>();
+  }
+
+  std::vector<bool> return_vector = current_state;
+  for (size_t i = 0; i < state_to_del.size(); i++) {
+    if (state_to_del[i]) {
+      return_vector[i] = false;
+    }
+  }
+  return return_vector;
+}
+
+std::vector<bool> AddState(std::vector<bool> state_to_add,
+                           std::vector<bool> current_state) {
+  if (state_to_add.size() != current_state.size()) {
+    printf("vectors differ in size. SHOULD NOT HAPPEN!\n");
+    return std::vector<bool>();
+  }
+
+  std::vector<bool> return_vector = current_state;
+  for (size_t i = 0; i < state_to_add.size(); i++) {
+    if (state_to_add[i]) {
+      return_vector[i] = true;
+    }
+  }
+  return return_vector;
 }
 
 std::vector<bool> AI::DecisionMaking::GOAP::UpdateState(std::vector<bool> state,
                                                         Task task) {
   std::vector<bool> return_state = state;
-  // if conditions met
-  // if ((return_state ^ task.pre_) == 0) {
-  if (IsStateZero(XOR(return_state, task.pre_))) {
-    // delete conditions
-    // return_state = ((~task.del_) & return_state);
-    return_state = AND(NEGATE(task.del_), return_state);
-    // add conditions
-    //return_state = (task.add_ | return_state);
-    return_state = OR(task.add_, return_state);
+
+  if (IsTaskPossible(task.pre_, state)) {
+    return_state = DelState(task.del_, return_state);  
+    return_state = AddState(task.add_, return_state);
   }
-  return state;
+  
+  return return_state;
 }
