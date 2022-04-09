@@ -6,10 +6,16 @@
 #include <string>
 #include <vector>
 
+#include "DecisionMaking\Actions\ActionManager.h"
 #include "GameObjects\Boid.h"
 #include "Pathfinding\ConnectionGraph.h"
-#include "DecisionMaking\Actions\ActionManager.h"
 #include "ofMain.h"
+
+#include "DecisionMaking\BehaviorTree\BehaviorTree.h"
+#include "DecisionMaking\DecisionTree\DecisionTree.h"
+#include "DecisionMaking\GOAP\GOAP.h"
+
+#include "DecisionMaking\Actions\GameActions\MoveToAction.h"
 
 class ofApp : public ofBaseApp {
  public:
@@ -30,12 +36,11 @@ class ofApp : public ofBaseApp {
   void gotMessage(ofMessage msg);
 
  private:
-  std::vector<AI::Rigidbody> GetRigidbodies(std::vector<AI::Boid> i_boids);
-  ofVec2f GoToCorner(int i_corner, AI::Boid i_boidToMove);
   AI::PathfindingAlgorithms::ConnectionGraph ReadInGraph(std::string file_path);
   void PrintVector(vector<int> path);
 
   AI::Boid leadBoid;
+  AI::Boid monsterBoid;
   int16_t corner = 0;
   bool draw_grid = false;
   bool draw_blocked_tiles = false;
@@ -43,10 +48,6 @@ class ofApp : public ofBaseApp {
   int rows = 15;
   int columns = 20;
   float tile_size = 51.0f;
-
-  // int rows = 5;
-  // int columns = 5;
-  // float tile_size = 100.0f;
 
   float grid_thickness = 5.0f;
   ofVec2f clickLocation = {500, 500};
@@ -61,6 +62,17 @@ class ofApp : public ofBaseApp {
       263, 264, 265, 266, 267, 269, 275, 276, 277, 278, 289};
 
   AI::DecisionMaking::ActionManager action_manager;
+  AI::DecisionMaking::DecisionTree DT;
+  AI::DecisionMaking::BehaviorTree BT;
+  AI::DecisionMaking::GOAP goap;
+  
+  AI::DecisionMaking::MoveToAction MTA = *new AI::DecisionMaking::MoveToAction(
+      &monsterBoid,
+      &(leadBoid.rigidbody.position),
+      &cg_graph,
+      tile_size
+  );
+
 };
 
 #endif  // OF_V0_11_2_VS2017_RELEASE_APPS_MYAPPS_STROHMYERHW2_SRC_OFAPP_H_

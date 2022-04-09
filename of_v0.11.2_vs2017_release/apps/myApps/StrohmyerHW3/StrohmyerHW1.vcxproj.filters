@@ -104,6 +104,19 @@
     <ClCompile Include="src\DecisionMaking\BehaviorTree\MoveToMyFlagAction.cpp">
       <Filter>DecisionMaking\BehaviorTrees\BTActionsAndConditions</Filter>
     </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\EnemyInRangeDecision.cpp">
+      <Filter>DecisionMaking\DecisionTrees\DTConditionsAndActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagInRangeDecision.cpp">
+      <Filter>DecisionMaking\DecisionTrees\DTConditionsAndActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagSafeDecision.cpp">
+      <Filter>DecisionMaking\DecisionTrees\DTConditionsAndActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagSafeDecision .cpp" />
+    <ClCompile Include="src\DecisionMaking\Actions\GameActions\MoveToAction.cpp">
+      <Filter>DecisionMaking\Actions\GameActions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -138,6 +151,12 @@
     </Filter>
     <Filter Include="DecisionMaking\BehaviorTrees\BTActionsAndConditions">
       <UniqueIdentifier>{7a64ddda-f959-427d-95fd-01d3d39b2788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecisionMaking\DecisionTrees\DTConditionsAndActions">
+      <UniqueIdentifier>{7de95e2e-987c-402c-8062-a3b69b9ee0ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DecisionMaking\Actions\GameActions">
+      <UniqueIdentifier>{c1e81cbe-940d-4e5d-81f2-260c08fb787f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +265,18 @@
     </ClInclude>
     <ClInclude Include="src\DecisionMaking\BehaviorTree\MoveToMyFlagAction.h">
       <Filter>DecisionMaking\BehaviorTrees\BTActionsAndConditions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\EnemyInRangeDecision.h">
+      <Filter>DecisionMaking\DecisionTrees\DTConditionsAndActions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagInRangeDecision.h">
+      <Filter>DecisionMaking\DecisionTrees\DTConditionsAndActions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagSafeDecision .h">
+      <Filter>DecisionMaking\DecisionTrees\DTConditionsAndActions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DecisionMaking\Actions\GameActions\MoveToAction.h">
+      <Filter>DecisionMaking\Actions\GameActions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

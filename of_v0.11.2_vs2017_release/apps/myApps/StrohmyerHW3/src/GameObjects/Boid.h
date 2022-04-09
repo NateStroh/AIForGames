@@ -23,6 +23,7 @@ class Boid {
 
   ofColor color = ofColor::blueSteel;
   float radius = 15;
+  bool hasEnemyFlag = false;
 
   float maxSpeed = 60.0f;
   float maxRotation = 60.0f;

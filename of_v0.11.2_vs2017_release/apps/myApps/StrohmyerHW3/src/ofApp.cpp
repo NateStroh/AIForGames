@@ -67,11 +67,11 @@ void ofApp::setup() {
   action_manager.Execute();
   action_manager.Execute();
 
-  TestAction test0("action 0!");
-  TestAction test1("action 1!");
-  TestAction test2("action 2!");
-  TestAction test3("action 3!");
-  TestAction test4("action 4!");
+  TestAction test0 = *new TestAction("action 0!");
+  TestAction test1 = *new TestAction("action 1!");
+  TestAction test2 = *new TestAction("action 2!");
+  TestAction test3 = *new TestAction("action 3!");
+  TestAction test4 = *new TestAction("action 4!");
 
   TestDTConditionNode condition0;
   TestDTConditionNode condition1;
@@ -96,7 +96,6 @@ void ofApp::setup() {
   condition3.false_node_ = &action3;
   condition3.true_node_ = &action4;
 
-  AI::DecisionMaking::DecisionTree DT;
   DT.action_manager_ = &action_manager;
   DT.root_node_ = &condition0;
 
@@ -117,8 +116,6 @@ void ofApp::setup() {
 
   std::vector<bool> start_state({ 0, 1, 0, 0, 0, 0, 0, 0, 1 });
   std::vector<bool> goal_state({ 0, 1, 0, 0, 0, 1, 0, 0, 0 });
-
-  AI::DecisionMaking::GOAP goap;
 
   AI::DecisionMaking::Task m1to2;
   m1to2.pre_ = std::vector<bool>({ 0, 1, 0, 0, 0, 0, 0, 0, 0 });
@@ -187,24 +184,23 @@ void ofApp::setup() {
 
   auto taskList = goap.GetBestAction(start_state, goal_state, tasks);
 
-  AI::DecisionMaking::BehaviorTree BT;
   BT.action_manager_ = &action_manager;
   
   bool b_isFlagSafe = true;
   bool b_haveEnemyFlag = false;
 
-  TestAction moveToEnemy("Moving to the enemy");
-  TestAction leftAttack("hit em with the left");
-  TestAction rightAttack("mean right hook");
-  TestAction moveToEnemyFlag("Moving to enemy flag");
-  TestAction moveToMyFlag("Moving to my flag");
+  TestAction moveToEnemy = *new TestAction("Moving to the enemy");
+  TestAction leftAttack  = *new TestAction("hit em with the left");
+  TestAction rightAttack  = *new TestAction("mean right hook");
+  TestAction moveToEnemyFlag = *new TestAction("Moving to enemy flag");
+  TestAction moveToMyFlag = *new TestAction("Moving to my flag");
 
   // composite nodes
   AI::DecisionMaking::Sequencer root_selector;
   AI::DecisionMaking::Selector selector1;
   AI::DecisionMaking::Selector selector2;
   AI::DecisionMaking::Sequencer sequence1;
-  AI::DecisionMaking::Sequencer sequence2;
+  AI::DecisionMaking::Selector sequence2;
   AI::DecisionMaking::Limit limit;
   AI::DecisionMaking::NonDetermenisticSequence randomSequence;
 
@@ -244,145 +240,30 @@ void ofApp::setup() {
 
   BT.root_node_ = &root_selector;
   AI::DecisionMaking::Action* asdf = BT.GetAction();
-  
-  int graph[9][9] = {
-      {0, 0, 0, 1, 0, 0, 0, 0, 0},
-      {0, 0, 0, 1, 0, 0, 0, 0, 0},
-      {0, 0, 0, 1, 0, 0, 0, 0, 0},
-      {1, 1, 1, 0, 3, 5, 0, 0, 0},
-      {0, 0, 0, 3, 0, 0, 0, 0, 0},
-      {0, 0, 0, 5, 0, 0, 1, 1, 0},
-      {0, 0, 0, 0, 0, 1, 0, 0, 1},
-      {0, 0, 0, 0, 0, 1, 0, 0, 2},
-      {0, 0, 0, 0, 0, 0, 1, 2, 0}};
-
-  int grid_test[25][25] = {{0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0,
-                            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,
-                            0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
-                            0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1,
-                            0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0,
-                            1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
-                            0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
-                            1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
-                            0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
-                            0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                            0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
-                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0}
-  };
-
-  AI::PathfindingAlgorithms::ConnectionGraph house_graph(3, 3);
-  for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) {
-      house_graph.data[i][j] = graph[i][j];
-    }
-  }
-
-  AI::PathfindingAlgorithms::ConnectionGraph cg(5, 5);
-  for (int i = 0; i < 25; i++) {
-    for (int j = 0; j < 25; j++) {
-      cg.data[i][j] = grid_test[i][j];
-    }
-  }
-
-  printf("House Graph - Dijkstra\n");
-  std::vector<int> house_path = AI::PathfindingAlgorithms::DijkstraSearch(
-      &house_graph, house_graph.num_nodes, 0, 8);
-  PrintVector(house_path);
-  printf("House Graph - AStar\n");
-  house_path = AI::PathfindingAlgorithms::AStarSearchMDH(
-      &house_graph, house_graph.num_nodes, 0, 8);
-  PrintVector(house_path);
-
-  printf("Grid Graph - Dijkstra\n");
-  std::vector<int> grid_path = AI::PathfindingAlgorithms::DijkstraSearch(
-      &cg, cg.num_nodes, 0, 24);
-  PrintVector(grid_path);
-  printf("Grid Graph - AStar\n");
-  grid_path = AI::PathfindingAlgorithms::AStarSearchMDH(
-      &cg, cg.num_nodes, 0, 24);
-  PrintVector(grid_path);
-
-  AI::PathfindingAlgorithms::ConnectionGraph cg1 =
-      ReadInGraph("Grid10000NodesRandom.txt");
-
-  std::vector<int> vec =
-      AI::PathfindingAlgorithms::DijkstraSearch(&cg1, cg1.num_nodes, 0, 5004);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchMDH(&cg1, cg1.num_nodes, 0, 5004);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchEDH(&cg1, cg1.num_nodes, 0, 5004,
-                                                  tile_size);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchRH(&cg1, cg1.num_nodes, 0, 5004);
-
-  vec = AI::PathfindingAlgorithms::DijkstraSearch(&cg1, cg1.num_nodes, 0, 9000);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchMDH(&cg1, cg1.num_nodes, 0, 9000);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchEDH(&cg1, cg1.num_nodes, 0, 9000,
-                                                  tile_size);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchRH(&cg1, cg1.num_nodes, 0, 9000);
-
-  vec = AI::PathfindingAlgorithms::DijkstraSearch(&cg1, cg1.num_nodes, 0, 9500);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchMDH(&cg1, cg1.num_nodes, 0, 9500);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchEDH(&cg1, cg1.num_nodes, 0, 9500,
-                                                  tile_size);
-
-  vec = AI::PathfindingAlgorithms::AStarSearchRH(&cg1, cg1.num_nodes, 0, 9500);
 
   cg_graph = ReadInGraph("Grid15by20BlockedTiles.txt");
+
+  action_manager.Execute();
+  action_manager.Execute();
+  action_manager.Execute();
 
   leadBoid.rigidbody.position = {100, 100.0f};
   leadBoid.rigidbody.orientation = ofDegToRad(0);
   leadBoid.color = ofColor::greenYellow;
   leadBoid.rigidbody.mass = 20;
+
+  monsterBoid.rigidbody.position = {300, 300.0f};
+  monsterBoid.rigidbody.orientation = ofDegToRad(0);
+  monsterBoid.color = ofColor::red;
+  monsterBoid.rigidbody.mass = 20;
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
   float deltaTime = ofGetLastFrameTime();
 
+  action_manager.Execute();
+  // MTA.Execute();
   if (!current_path.empty()) {
     leadBoid.steeringOutput.linearAcceleration =
         AI::MovementAlgorithms::FollowPath(
@@ -411,11 +292,13 @@ void ofApp::update() {
   }
 
   leadBoid.Update(deltaTime);
+  monsterBoid.Update(deltaTime);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
   leadBoid.Draw();
+  monsterBoid.Draw();
   // drawing grid
   if (draw_grid) {
     ofSetColor(ofColor::forestGreen);
@@ -523,47 +406,6 @@ void ofApp::windowResized(int w, int h) {}
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg) {}
-
-std::vector<AI::Rigidbody> ofApp::GetRigidbodies(
-    std::vector<AI::Boid> i_boids) {
-  std::vector<AI::Rigidbody> rigidbodies;
-
-  for (AI::Boid boid : i_boids) {
-    rigidbodies.push_back(boid.rigidbody);
-  }
-
-  return rigidbodies;
-}
-
-ofVec2f ofApp::GoToCorner(int i_corner, AI::Boid i_boidToMove) {
-  ofVec2f positionToSeekTo;
-
-  switch (corner) {
-    default:
-      corner = 0;
-      break;
-    case 0:
-      positionToSeekTo = {100, 100};
-      if (i_boidToMove.rigidbody.position.y < positionToSeekTo.y) corner = 1;
-      break;
-    case 1:
-      positionToSeekTo = {ofGetCurrentViewport().getRight() - 100.0f, 100};
-      if (i_boidToMove.rigidbody.position.x > positionToSeekTo.x) corner = 2;
-      break;
-    case 2:
-      positionToSeekTo = {ofGetCurrentViewport().getRight() - 100.0f,
-                          ofGetCurrentViewport().getBottom() - 100.0f};
-      if (i_boidToMove.rigidbody.position.y > positionToSeekTo.y) corner = 3;
-      break;
-    case 3:
-      positionToSeekTo = {100, ofGetCurrentViewport().getBottom() - 100.0f};
-      break;
-  }
-
-  return AI::MovementAlgorithms::Seek(i_boidToMove.rigidbody,
-                                      AI::Rigidbody(positionToSeekTo, 0), 120)
-      .linearAcceleration;
-}
 
 AI::PathfindingAlgorithms::ConnectionGraph ofApp::ReadInGraph(
     std::string file_path) {

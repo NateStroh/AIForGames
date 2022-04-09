@@ -184,6 +184,7 @@
     <ClCompile Include="src\DecisionMaking\Actions\ActionCombination.cpp" />
     <ClCompile Include="src\DecisionMaking\Actions\ActionManager.cpp" />
     <ClCompile Include="src\DecisionMaking\Actions\ActionSequence.cpp" />
+    <ClCompile Include="src\DecisionMaking\Actions\GameActions\MoveToAction.cpp" />
     <ClCompile Include="src\DecisionMaking\BehaviorTree\AttackActionLeft.cpp" />
     <ClCompile Include="src\DecisionMaking\BehaviorTree\AttackActionRight.cpp" />
     <ClCompile Include="src\DecisionMaking\BehaviorTree\BehaviorTree.cpp" />
@@ -204,6 +205,10 @@
     <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeAction.cpp" />
     <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeDecision.cpp" />
     <ClCompile Include="src\DecisionMaking\DecisionTree\DecisionTreeNode.cpp" />
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagInRangeDecision.cpp" />
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagSafeDecision .cpp" />
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagSafeDecision.cpp" />
+    <ClCompile Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\EnemyInRangeDecision.cpp" />
     <ClCompile Include="src\DecisionMaking\GOAP\GOAP.cpp" />
     <ClCompile Include="src\DecisionMaking\GOAP\Task.cpp" />
     <ClCompile Include="src\GameObjects\Boid.cpp" />
@@ -223,6 +228,7 @@
     <ClInclude Include="src\DecisionMaking\Actions\ActionCombination.h" />
     <ClInclude Include="src\DecisionMaking\Actions\ActionManager.h" />
     <ClInclude Include="src\DecisionMaking\Actions\ActionSequence.h" />
+    <ClInclude Include="src\DecisionMaking\Actions\GameActions\MoveToAction.h" />
     <ClInclude Include="src\DecisionMaking\BehaviorTree\AttackActionLeft.h" />
     <ClInclude Include="src\DecisionMaking\BehaviorTree\AttackActionRight.h" />
     <ClInclude Include="src\DecisionMaking\BehaviorTree\BehaviorTree.h" />
@@ -243,6 +249,9 @@
     <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeAction.h" />
     <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeDecision.h" />
     <ClInclude Include="src\DecisionMaking\DecisionTree\DecisionTreeNode.h" />
+    <ClInclude Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagInRangeDecision.h" />
+    <ClInclude Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\FlagSafeDecision .h" />
+    <ClInclude Include="src\DecisionMaking\DecisionTree\GameActionAndConditions\EnemyInRangeDecision.h" />
     <ClInclude Include="src\DecisionMaking\GOAP\GOAP.h" />
     <ClInclude Include="src\DecisionMaking\GOAP\Task.h" />
     <ClInclude Include="src\GameObjects\Boid.h" />
